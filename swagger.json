@@ -1,0 +1,194 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Notes API",
+    "version": "1.0.0",
+    "description": "API for managing notes (create, update, fetch, delete)"
+  },
+  "servers": [
+    {
+      "url": "http://localhost:5000/api/notes"
+    }
+  ],
+  "paths": {
+    "/get/allData": {
+      "get": {
+        "summary": "Get all active notes",
+        "responses": {
+          "200": {
+            "description": "A list of notes",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": { "$ref": "#/components/schemas/Note" }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/{id}": {
+      "get": {
+        "summary": "Get a note by ID",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": { "type": "string" }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Note found",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/Note" }
+              }
+            }
+          },
+          "500": {
+            "description": "Error or note not found"
+          }
+        }
+      }
+    },
+    "/create": {
+      "post": {
+        "summary": "Create a single note",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/NoteInput" }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Note created",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/Note" }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/create/multiple": {
+      "post": {
+        "summary": "Create multiple notes",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "array",
+                "items": { "$ref": "#/components/schemas/NoteInput" }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Notes created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": { "$ref": "#/components/schemas/Note" }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/update/{id}": {
+      "post": {
+        "summary": "Update a note by ID",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": { "type": "string" }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/NoteInput" }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Note updated",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/Note" }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/delete/{id}": {
+      "post": {
+        "summary": "Soft delete a note by ID",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": { "type": "string" }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Note soft deleted",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": { "type": "string" },
+                    "note": { "$ref": "#/components/schemas/Note" }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Note": {
+        "type": "object",
+        "properties": {
+          "_id": { "type": "string" },
+          "title": { "type": "string" },
+          "content": { "type": "string" },
+          "isActive": { "type": "boolean" },
+          "createdAt": { "type": "string", "format": "date-time" },
+          "updatedAt": { "type": "string", "format": "date-time" }
+        }
+      },
+      "NoteInput": {
+        "type": "object",
+        "required": ["title"],
+        "properties": {
+          "title": { "type": "string" },
+          "content": { "type": "string" }
+        }
+      }
+    }
+  }
+}
