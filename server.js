@@ -10,7 +10,7 @@ const app = express();
 
 const whitelist = [
   'http://localhost:3001',           // local frontend
-  'https://viishalroxx.netlify.app/',          // production frontend
+  'https://notesfront-abcx.onrender.com',          // production frontend
 ];
 
 const corsOptions = {
