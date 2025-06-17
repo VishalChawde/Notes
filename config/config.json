@@ -1,5 +1,4 @@
 {
-  "MONGO_URI": "mongodb+srv://vishal:1234567890@cluster0.ewppovb.mongodb.net/notesdb?retryWrites=true&w=majority&appName=Cluster0",
   "BASEPATH": "/api/notes",
   "PORT": "5000"
 }
