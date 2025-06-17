@@ -1,0 +1,36 @@
+# Node modules
+node_modules/
+
+# Environment files
+.env
+
+# Logs
+logs/
+*.log
+npm-debug.log*
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Build artifacts
+dist/
+build/
+
+# Configs you want to keep private
+config/config.json
+
+# IDE/Editor folders
+.vscode/
+.idea/
+
+# Coverage reports
+coverage/
+
+# Unwanted local data
+*.local
+*.bak
+*.tmp
+
+# Ignore all .env* files
+.env.*
